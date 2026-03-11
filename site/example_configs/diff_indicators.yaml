@@ -1,0 +1,22 @@
+year1:
+  data_path: null  # path to segmentation raster, or dict with 'segment' key
+  hedges_linear_path: null  # path to the hedges_linear.parquet from indicators
+  grid_path: null  # optional, inferred from data_path if None
+
+year2:
+  data_path: null  # path to segmentation raster, or dict with 'segment' key
+  hedges_linear_path: null  # path to the hedges_linear.parquet from indicators
+  grid_path: null  # optional, inferred from data_path if None
+
+resolution: 0.2  # meters per pixel
+tile_size: 5000  # meters
+buffer: 0  # meters, buffer around tiles for edge handling (can be left 0)
+
+diff:
+  alpha: 30  # low threshold (segment score below this = no hedge)
+  beta: 70   # high threshold (segment score above this = hedge)
+  min_points: 10  # minimum sampled points meeting threshold
+  min_length: 15  # meters, filter short hedges
+
+save_dir: null  # required, where to write results
+split: null  # optional filter on split column

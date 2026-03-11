@@ -1,0 +1,19 @@
+# conf/config.yaml
+_target_: haies.clis.create_split.Config
+
+version: null  # Automatically set to timestamp if null
+
+save_dir: ./outputs/splits
+targets_data_dir:
+  target_1: [./data/targets_1]
+  target_2: [./data/targets_2]
+bdortho_dir: [./data/bdortho]
+
+test_side_length: 5_000
+buffer: 1_000
+test_area: 100_000_000
+val_proportion: 0.1
+
+seed: 42
+overwrite: true
+convert_to_tif: false

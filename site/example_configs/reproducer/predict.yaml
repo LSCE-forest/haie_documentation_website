@@ -1,0 +1,27 @@
+data:
+  class_path: haies.data.MultiHeadDataModule
+  init_args:
+    cfg:
+      predict_patch_size: 1024
+      predict_batch_size: 1
+      num_workers: 8
+    backend_cfg:
+      class_path: haies.data.config.FromRasterBackend
+trainer:
+  callbacks+:
+    - class_path: haies.callbacks.PredictionsToTifs
+      init_args:
+        output_path: ./outputs/predictions
+        targets:
+          - height
+          - segment
+        merge_params:
+          height:
+            dtype: uint16
+            normalization: 100.0
+          segment:
+            dtype: uint8
+            normalization: 100.0
+        async_merge: false
+
+

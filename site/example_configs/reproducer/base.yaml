@@ -1,0 +1,105 @@
+seed_everything: 41 # replace with true for a random seed
+data:
+  class_path: haies.data.MultiHeadDataModule
+  init_args:
+    cfg:
+      targets: [height, segment]
+      geometries_path: ./data/geometries.parquet
+      target_scaling_factor:
+        height: 0.157 # lidarhd has been mapped from [0, 40] to [0, 255]. We map it back to [0, 40].
+        # segment has no scaling factor
+      resolution: 0.2
+      normalization_constants:
+        mean: [110, 110, 100]
+        std: [45, 40, 40]
+      target_max_value:
+        height: 40
+      patch_size: 512
+      batch_size: 8
+      num_workers: 8
+      persistent_workers: true
+      replace_nan_by_zero_in_target: false
+      replace_nan_by_zero_in_input: false
+    backend_cfg:
+      class_path: haies.data.config.FeatureFromMmapTargetsFromRasterBackend
+      init_args:
+        mmap_dir: ./data/mmaps
+        tiles_per_arr: 100
+model:
+  class_path: haies.modules.multihead_module.MultiHeadModule
+  init_args:
+    mask_threshold: 0.5
+    activation_pred: # activation for each head (for predictions only, as activation is usually integrated in the loss for training)
+      segment:
+        class_path: torch.nn.Sigmoid
+    target_types:
+      height: regression
+      segment: segmentation
+    net:
+      class_path: haies.nets.unet.UNet
+      init_args:
+        n_channels: 3
+        n_heads: 1
+    criterion:
+      class_path: haies.losses.multihead_loss.MultiHeadLoss
+      init_args:
+        loss_functions:
+          height:
+            class_path: torch.nn.HuberLoss
+            # class_path: torch.nn.MSELoss
+          segment:
+            class_path: torch.nn.BCEWithLogitsLoss
+            init_args:
+              pos_weight:
+                class_path: haies.utils.utils.tensor_factory
+                init_args:
+                  data: [60]
+                  dtype: float32
+        pooling_size: 1
+    optimizer:
+      class_path: torch.optim.AdamW
+      init_args:
+        lr: &lr 1e-5
+        weight_decay: 1e-5
+    lr_scheduler:
+      class_path: sprout.utils.torch.OneAfterAnotherSchedulerCLI
+      init_args:
+        schedulers:
+          - class_path: torch.optim.lr_scheduler.OneCycleLR
+            init_args:
+              max_lr: 1e-4
+              total_steps: &n_warmup_epochs 50
+          - class_path: sprout.utils.torch.SetLR
+            init_args:
+              lr: *lr
+          - class_path: torch.optim.lr_scheduler.CosineAnnealingLR
+            init_args:
+              T_max: 100
+              eta_min: 5e-7
+        nsteps: [*n_warmup_epochs, 1, -1]
+trainer:
+  strategy: auto
+  # strategy: ddp_find_unused_parameters_true
+  default_root_dir: &root_dir_trainer ./outputs/training
+  accelerator: auto
+  devices: 1
+  num_nodes: 1
+  accumulate_grad_batches: 4
+  deterministic: True
+  max_epochs: 150
+  precision: 16
+  plugins:
+    - class_path: lightning.pytorch.plugins.environments.SLURMEnvironment
+      init_args:
+        requeue_signal: SIGUSR1
+  logger:
+    class_path: lightning.pytorch.loggers.TensorBoardLogger
+    init_args:
+      save_dir: *root_dir_trainer
+      name: alpha
+      version: null
+  log_every_n_steps: 10
+  enable_progress_bar: True
+  max_time: null
+  check_val_every_n_epoch: 1
+ckpt_path: null

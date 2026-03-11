@@ -1,0 +1,55 @@
+trainer:
+  callbacks:
+    - class_path: lightning.pytorch.callbacks.ModelCheckpoint # Save the best checkpoint based on the maximum val_acc recorded.
+      init_args:
+        save_top_k: 3
+        save_last: link
+        monitor: val/epoch_loss
+        save_weights_only: False # Keep this option to False in order to be able to resume training from checkpoint
+        mode: min
+    - class_path: lightning.pytorch.callbacks.LearningRateMonitor
+      init_args:
+        logging_interval: epoch
+    - class_path: haies.callbacks.GeoImageTensorboardLogger
+      init_args:
+        pred_key: height
+        every_n_epochs: 20
+        viz_params:
+          Feature:
+            vmin: -1.2
+            vmax: 1.2
+          Label:
+            vmax: 40
+          Prediction:
+            vmax: 40
+    - class_path: haies.callbacks.GeoImageTensorboardLogger
+      init_args:
+        pred_key: segment
+        viz_head:
+          class_path: torch.nn.Sigmoid
+        every_n_epochs: 20
+        viz_params:
+          Feature:
+            vmin: -1.2
+            vmax: 1.2
+          Label:
+            vmin: 0
+            vmax: 1
+          Prediction:
+            vmax: 1
+    - class_path: haies.callbacks.LogErrorScatterPlot
+      init_args:
+        target: height
+        figdpi: 40
+        range_fig: [2, 30]
+        gridsize: 60
+        min_label_value: 0
+    - class_path: haies.callbacks.LogErrorScatterPlot
+      init_args:
+        target: segment
+        figdpi: 40
+        range_fig: [0, 1]
+        gridsize: 20
+        min_label_value: 0
+
+

@@ -1,0 +1,13 @@
+hedges_db_path: ./data/hedges.parquet
+lidar_dir: ./data/lidar
+# You can also provide a list of directories:
+# lidar_dir:
+#   - /path/to/dir1
+#   - /path/to/dir2
+save_dir: ./outputs/labels
+dilation_edge: 5
+min_height: 0.7
+override: false
+
+hydra:
+  output_subdir: null

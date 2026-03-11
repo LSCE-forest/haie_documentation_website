@@ -1,0 +1,33 @@
+data_path:
+  height: "./outputs/predictions/height" # directory or .vrt
+  segment: "./outputs/predictions/segment" # directory or .vrt
+
+score_threshold: 20  # between 0 and 100
+
+resolution: 0.2
+scaling_factor: 100
+buffer: 100
+
+forest_mask_path: "./data/foret.parquet"
+forest_buffer: 1 # meters
+height_threshold: 0.8 # meters
+
+save_dir: "./outputs/indicators"
+grid_path: null  # if null, the whole data_path is used instead
+split: null
+
+linear:
+  min_distance: 4
+  sigma: 5
+  l2_threshold: 0.1
+  simplify_tolerance: 0.3 # meters
+
+biomass:
+  alpha: 0.1
+  beta: 1.1
+
+override: true
+
+start_index: null
+ix: 0
+n_tiles_to_process: 20000

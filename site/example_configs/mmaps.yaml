@@ -1,0 +1,22 @@
+# conf/config.yaml
+_target_: haies.clis.create_mmaps.Config
+
+mmap_dir: ./data/mmaps
+geometries_path: ./data/geometries.parquet
+targets:
+  - target_1
+  - target_2
+patch_size: null # Automatically inferred if null
+resolution: 1.0
+target_scaling_factor:
+  target_1: 1.0
+  # target_2 is not scaled
+target_band_list:
+  target_1: [0, 1, 2]
+  # target_2 uses al bands
+replace_nan_by_zero_in_input: false
+replace_nan_by_zero_in_target: true
+target_max_value:
+  target_1: 100.0
+  # target_2 has no max value
+tiles_per_arr: 100
