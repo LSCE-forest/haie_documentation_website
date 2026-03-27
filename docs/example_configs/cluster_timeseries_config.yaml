@@ -1,0 +1,23 @@
+# Configuration for clustering interpolated Sentinel-2 time series
+
+# Directory containing the interpolated time series parquet file
+save_dir: /Users/dpurnell/data/gaia/GAIA_LSCE_dpurnell_data/sentinel2_ts/ts_all_parcels
+
+# Path to interpolated time series parquet (optional, defaults to save_dir/sentinel_timeseries_interpolated.parquet)
+# input_parquet: null
+
+# Vegetation index to use for clustering
+# Options: NDVI_median, NDRE_median, GLI_median, NDWI_median, or any band like B4_median
+index_column: NDVI_median
+
+# Number of clusters (optional - if not specified, will be determined automatically)
+n_clusters: 2
+
+# Range of k values to test for optimal cluster selection
+k_min: 2
+k_max: 10
+
+# Hydra configuration
+hydra:
+  output_subdir: null
+

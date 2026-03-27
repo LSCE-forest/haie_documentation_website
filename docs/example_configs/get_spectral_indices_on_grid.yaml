@@ -1,0 +1,18 @@
+lidar_path: "/Volumes/T7 Shield/hedges/lidar_recombined/full.vrt"
+ortho_path: '/Volumes/T7 Shield/bdortho/charente-charente-maritime/full.vrt'
+resolution: 0.2
+scaling_factor: 100
+rgp_path: '/Volumes/T7 Shield/hedges/rpg_charente_charente_maritime.parquet'
+rgp_select_id_list: ["VG", "VN", "VRC", "VRT", "VV", "VU", "VX", "VY", "VZ", "VRN", "VI", "VT"]
+save_dir: "/Volumes/T7 Shield/hedges/vegetation_cover"
+grid_path: "/Volumes/T7 Shield/hedges/splits/20241201/geometries_with_vineyards.parquet"
+split: "test"
+sentinel_dir: "/Volumes/T7 Shield/hedges/sentinel"
+date_list: ["202303", "202304", "202304", "202305", "202306", "202307", "202308", "202309", "202310", "202311"]
+
+ix: 0
+n_tiles_to_process: 20000
+
+
+hydra:
+  output_subdir: null

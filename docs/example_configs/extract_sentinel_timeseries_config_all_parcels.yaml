@@ -1,0 +1,52 @@
+extract_timeseries: True
+interpolate_timeseries: True
+aggregate_by_zone: True
+create_zone_plots: True
+# Save masked rasters for visualization/verification
+save_masked_rasters: False
+# Create NDVI time series plots for each polygon
+create_plots: False
+
+# Configuration for extracting Sentinel-2 time series from polygons
+
+# Directory(s) containing Sentinel-2 time series images
+sentinel_dir: "/Users/dpurnell/data/gaia/GAIA_LSCE_dpurnell_data/sentinel2_ts/labataille_douvesse_mainedeschamps"
+# sentinel_dir: "/Users/dpurnell/data/gaia/GAIA_LSCE_dpurnell_data/sentinel2_ts/lepeu"
+# sentinel_dir: "/Users/dpurnell/data/gaia/GAIA_LSCE_dpurnell_data/sentinel2_ts/touzac"
+
+# Path to KML file containing polygons
+polygons_path: /Users/dpurnell/data/gaia/GAIA_LSCE_dpurnell_data/sentinel2_ts/vineyards_charente_charente_maritime.geojson
+
+# Output directory
+save_dir: /Users/dpurnell/data/gaia/GAIA_LSCE_dpurnell_data/sentinel2_ts/ts_all_parcels
+
+# Target CRS for reprojecting polygons
+# Set to null to automatically use the CRS from Sentinel-2 images (recommended)
+# Or specify an EPSG code as integer (e.g., 2154 for Lambert 93)
+target_crs: null
+
+# Glob pattern to find Sentinel-2 image files in sentinel_dir
+# Examples:
+#   "*.vrt"           - all VRT files in sentinel_dir
+#   "*.tif"           - all TIFF files
+#   "s2_*.vrt"        - VRT files starting with s2_
+#   "**/*.vrt"        - VRT files in sentinel_dir and all subdirectories
+file_pattern: "*.tif"
+
+# Band names for Sentinel-2 (in order as they appear in the raster)
+# Set to null to use default band_1, band_2, etc.
+band_names:
+  - "B2"   # Blue
+  - "B3"   # Green
+  - "B4"   # Red
+  - "B5"   # Red Edge 1
+  - "B6"   # Red Edge 2
+  - "B7"   # Red Edge 3
+  - "B8"   # NIR
+  - "B8A"  # NIR narrow
+  - "B11"  # SWIR 1
+  - "B12"  # SWIR 2
+
+# Hydra configuration
+hydra:
+  output_subdir: null

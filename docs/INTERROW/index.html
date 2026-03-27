@@ -1,0 +1,1394 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Deep learning for hedge segmentation and volume estimation">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>Inter-row vegetation analysis - Haies</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#inter-row-vegetation-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Haies" class="md-header__button md-logo" aria-label="Haies" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Haies
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Inter-row vegetation analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/LSCE-forest/haies" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Haies" class="md-nav__button md-logo" aria-label="Haies" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Haies
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/LSCE-forest/haies" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../tutorial/how-to-use/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How to Use
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How to Use
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/how-to-use/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Environment Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/how-to-use/download/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Data Download
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/how-to-use/preprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Label Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/how-to-use/splitting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Dataset Splitting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/how-to-use/mmaps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Accelerating Training
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/how-to-use/training/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Model Training
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/how-to-use/prediction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Running Predictions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/how-to-use/indicators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Computing Indicators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/nets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/losses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Losses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#previous-work-by-fajwel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Previous work by Fajwel
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Previous work by Fajwel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processing steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reproducing-fajwels-inter-row-analysis-in-la-bataille-region" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reproducing Fajwel's inter-row analysis in La Bataille region
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reproducing Fajwel&#39;s inter-row analysis in La Bataille region">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow overview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-create-datasets-masked-to-parcel-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Create datasets masked to parcel boundaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-compute-gli-on-masked-parcels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Compute GLI on masked parcels
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sentinel-2-time-series-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sentinel-2 time series analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sentinel-2 time series analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Download data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-notes-on-cloud-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Important notes on cloud parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extract-sentinel-2-time-series-per-parcel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extract Sentinel-2 time series per parcel
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extract Sentinel-2 time series per parcel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-steps_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processing steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cluster-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cluster analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-outputs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-extract-time-series-over-larger-area" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Extract time series over larger area
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-run-cluster-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Run cluster analysis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processing-steps_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processing steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="inter-row-vegetation-analysis">Inter-row vegetation analysis<a class="headerlink" href="#inter-row-vegetation-analysis" title="Permanent link">&para;</a></h1>
+<p>This document provides notes and instructions for analyzing inter-row vegetation cover in vineyards and comparing results with internal data.</p>
+<p><strong>Note: In all provided configurations, paths to data have been left as-is. You will need to edit them to match data on your desired environment.</strong></p>
+<hr />
+<h2 id="previous-work-by-fajwel">Previous work by Fajwel<a class="headerlink" href="#previous-work-by-fajwel" title="Permanent link">&para;</a></h2>
+<p><strong>Note: The script <code>haies_spectral_indices</code> could not be run successfully, but is documented here for completeness and reference.</strong></p>
+<p>This workflow was designed to compute spectral indices on a grid for vineyard regions using LiDAR and satellite imagery.</p>
+<h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>haies_spectral_indices
+</code></pre></div>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<p>The script uses <a href="../example_configs/get_spectral_indices_on_grid.yaml">get_spectral_indices_on_grid.yaml</a>, which specifies:
+- LiDAR and ortho imagery paths
+- RPG vineyard parcel selection criteria
+- Sentinel-2 data directory and date range
+- Output resolution and save directory</p>
+<h3 id="processing-steps">Processing steps<a class="headerlink" href="#processing-steps" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Process vineyard regions specified in the configuration</li>
+<li>Create masks to identify areas between vine rows using LiDAR height data</li>
+<li>Compute spectral indices (EXG, GLI, NDVI) from both aerial and Sentinel-2 imagery</li>
+<li>Save results as both raster files and vector data (parquet/GeoJSON)</li>
+</ol>
+<hr />
+<h2 id="reproducing-fajwels-inter-row-analysis-in-la-bataille-region">Reproducing Fajwel's inter-row analysis in La Bataille region<a class="headerlink" href="#reproducing-fajwels-inter-row-analysis-in-la-bataille-region" title="Permanent link">&para;</a></h2>
+<p>This workflow masks rows of vines in the La Bataille region, computes spectral indices, and compares aggregated values between fully-cultivated and half-cultivated parcels.</p>
+<h3 id="example-outputs">Example outputs<a class="headerlink" href="#example-outputs" title="Permanent link">&para;</a></h3>
+<p>Vine mask:</p>
+<p><img alt="Vine mask" src="../assets/images/vine_mask.png" /></p>
+<p>GLI analysis results:</p>
+<p><img alt="GLI boxplot by cultivation type" src="../assets/images/gli_boxplot_by_cultivation_type.png" />
+<img alt="GLI boxplot by zone" src="../assets/images/gli_boxplot_by_zone.png" /></p>
+<h3 id="required-data">Required data<a class="headerlink" href="#required-data" title="Permanent link">&para;</a></h3>
+<ul>
+<li>BDOrtho imagery (note the precise acquisition dates)</li>
+<li>Height output from model (LiDAR-derived)</li>
+<li>Parcel polygons</li>
+<li>Internal cultivation data</li>
+</ul>
+<p>Ensure that dates match between imagery and reference data.</p>
+<h3 id="workflow-overview">Workflow overview<a class="headerlink" href="#workflow-overview" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Determine AOI based on internal data in La Bataille region</li>
+<li>Create dataset of height data and BDOrtho data masked to parcel boundaries</li>
+<li>Create per-parcel vine row mask using minimum height as a filter</li>
+<li>Apply vine row mask on BDOrtho data</li>
+<li>Calculate spectral indices on masked data</li>
+<li>Compare parcels by cultivation type (fully-cultivated vs. half-cultivated)</li>
+</ol>
+<h3 id="step-1-create-datasets-masked-to-parcel-boundaries">Step 1: Create datasets masked to parcel boundaries<a class="headerlink" href="#step-1-create-datasets-masked-to-parcel-boundaries" title="Permanent link">&para;</a></h3>
+<p>This script masks raster data (height and BDOrtho) to individual parcel polygons and saves them as separate TIF files per parcel.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>src/haies/spectral_indices/mask_raster_by_polygons.py
+</code></pre></div>
+<h3 id="step-2-compute-gli-on-masked-parcels">Step 2: Compute GLI on masked parcels<a class="headerlink" href="#step-2-compute-gli-on-masked-parcels" title="Permanent link">&para;</a></h3>
+<p>This script applies binary erosion to remove edge artifacts, computes GLI from RGB imagery, and aggregates results by zone and cultivation type.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python<span class="w"> </span>src/haies/spectral_indices/compute_masked_gli.py
+</code></pre></div>
+<p><strong>Note on biomass calculation:</strong> This script also calculates the estimated areas of masked parcels, which can be used for biomass estimation. Example output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Zone Area Summary:
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>--------------------------------------------------------------------------------
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  douvesse (fully-cultivated): 12 parcels, 14.92 ha before → 6.90 ha after (46.3% retained)
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  la_bataille (half-cultivated): 36 parcels, 63.51 ha before → 14.85 ha after (23.4% retained)
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  le_peu (half-cultivated): 19 parcels, 42.13 ha before → 6.00 ha after (14.2% retained)
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  maine_des_champs (fully-cultivated): 14 parcels, 32.93 ha before → 6.72 ha after (20.4% retained)
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  touzac (half-cultivated): 9 parcels, 16.09 ha before → 6.48 ha after (40.2% retained)
+</code></pre></div>
+<hr />
+<h2 id="sentinel-2-time-series-analysis">Sentinel-2 time series analysis<a class="headerlink" href="#sentinel-2-time-series-analysis" title="Permanent link">&para;</a></h2>
+<p>This section covers downloading Sentinel-2 imagery, extracting time series statistics per parcel, and performing cluster analysis to identify vegetation patterns.</p>
+<h3 id="download-data">Download data<a class="headerlink" href="#download-data" title="Permanent link">&para;</a></h3>
+<p>Download Sentinel-2 imagery using the <a href="https://github.com/gbelouze/geefetch">geefetch library</a>. See the <a href="https://geefetch.readthedocs.io/en/latest/">documentation</a> for installation instructions.</p>
+<h4 id="usage_1">Usage<a class="headerlink" href="#usage_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>geefetch<span class="w"> </span>s2<span class="w"> </span>-c<span class="w"> </span>src/configs/geefetch_cognac.yaml
+</code></pre></div>
+<h4 id="configuration_1">Configuration<a class="headerlink" href="#configuration_1" title="Permanent link">&para;</a></h4>
+<p>The <a href="../example_configs/geefetch_cognac.yaml">geefetch_cognac.yaml</a> configuration specifies:
+- AOI spatial extent (UTM 30N coordinates covering the Cognac region)
+- Temporal range (e.g., 2022-05-01 to 2024-04-30)
+- Selected bands: B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12
+- Cloud filtering parameters
+- Output resolution (10m) and tile size</p>
+<h4 id="important-notes-on-cloud-parameters">Important notes on cloud parameters<a class="headerlink" href="#important-notes-on-cloud-parameters" title="Permanent link">&para;</a></h4>
+<p>Pay close attention to cloud filtering settings in the geefetch <a href="https://github.com/gbelouze/geefetch/blob/main/src/geefetch/data/satellites/s2.py"><code>s2.py</code></a> script, particularly lines 129 and 164. Incorrect cloud parameters can result in missing or poor-quality (cloudy) data.</p>
+<hr />
+<h3 id="extract-sentinel-2-time-series-per-parcel">Extract Sentinel-2 time series per parcel<a class="headerlink" href="#extract-sentinel-2-time-series-per-parcel" title="Permanent link">&para;</a></h3>
+<p>This script extracts per-zone time series of vegetation-related indices from Sentinel-2 imagery.</p>
+<h4 id="example-output">Example output<a class="headerlink" href="#example-output" title="Permanent link">&para;</a></h4>
+<p><img alt="GLI at Douvesse" src="../assets/images/zone_douvesse.png" /></p>
+<h4 id="usage_2">Usage<a class="headerlink" href="#usage_2" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>haies_sentinel_timeseries
+</code></pre></div>
+<h4 id="configuration_2">Configuration<a class="headerlink" href="#configuration_2" title="Permanent link">&para;</a></h4>
+<p>Edit <a href="../example_configs/extract_sentinel_timeseries_config.yaml">extract_sentinel_timeseries_config.yaml</a> to specify:
+- <code>sentinel_dir</code>: Directory containing Sentinel-2 time series images
+- <code>polygons_path</code>: Path to KML or GeoJSON file containing parcel polygons
+- <code>save_dir</code>: Output directory for results
+- <code>band_names</code>: Sentinel-2 band mapping (B2-B12)
+- Processing flags: <code>extract_timeseries</code>, <code>interpolate_timeseries</code>, <code>aggregate_by_zone</code>, <code>create_zone_plots</code></p>
+<p>Override parameters on the command line:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>haies_sentinel_timeseries<span class="w"> </span><span class="nv">extract_timeseries</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="nv">create_plots</span><span class="o">=</span><span class="nb">true</span>
+</code></pre></div>
+<h4 id="processing-steps_1">Processing steps<a class="headerlink" href="#processing-steps_1" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Load polygons from a KML file (or other vector format)</li>
+<li>Extract mean, std, min, max, and median values for each Sentinel-2 band</li>
+<li>Compute vegetation indices (NDVI, NDRE, GLI, NDWI)</li>
+<li>Process all time steps to create a time series for each polygon</li>
+<li>Interpolate time series to regular intervals</li>
+<li>Save results as parquet and CSV files with optional pivot tables for visualization</li>
+</ol>
+<hr />
+<h3 id="cluster-analysis">Cluster analysis<a class="headerlink" href="#cluster-analysis" title="Permanent link">&para;</a></h3>
+<p>This workflow identifies natural groupings in vegetation index time series using k-means clustering to discover phenological patterns across parcels.</p>
+<h4 id="example-outputs_1">Example outputs<a class="headerlink" href="#example-outputs_1" title="Permanent link">&para;</a></h4>
+<p>Cluster centroids (two classes using NDVI):</p>
+<p><img alt="Cluster centroids" src="../assets/images/cluster_centroids.png" /></p>
+<p>Sample time series from clustering analysis:</p>
+<p><img alt="Cluster 1 samples" src="../assets/images/cluster_1_samples.png" /></p>
+<h4 id="step-1-extract-time-series-over-larger-area">Step 1: Extract time series over larger area<a class="headerlink" href="#step-1-extract-time-series-over-larger-area" title="Permanent link">&para;</a></h4>
+<p>Extract Sentinel-2 time series for all parcels within a 20 km region in the Charente region using the expanded configuration.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>haies_sentinel_timeseries<span class="w"> </span>-cn<span class="w"> </span>extract_sentinel_timeseries_config_all_parcels
+</code></pre></div>
+<p>This uses <a href="../example_configs/extract_sentinel_timeseries_config_all_parcels.yaml">extract_sentinel_timeseries_config_all_parcels.yaml</a>, which includes all vineyard parcels from the regional GeoJSON rather than just internal parcels.</p>
+<h4 id="step-2-run-cluster-analysis">Step 2: Run cluster analysis<a class="headerlink" href="#step-2-run-cluster-analysis" title="Permanent link">&para;</a></h4>
+<p>Apply k-means clustering to the interpolated time series data.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>haies_cluster_timeseries
+</code></pre></div>
+<h4 id="configuration_3">Configuration<a class="headerlink" href="#configuration_3" title="Permanent link">&para;</a></h4>
+<p>Edit <a href="../example_configs/cluster_timeseries_config.yaml">cluster_timeseries_config.yaml</a> to specify:
+- <code>save_dir</code>: Directory containing interpolated time series parquet file
+- <code>index_column</code>: Vegetation index to cluster on (e.g., <code>NDVI_median</code>, <code>GLI_median</code>)
+- <code>n_clusters</code>: Number of clusters (optional, auto-determined if not specified)
+- <code>k_min</code>, <code>k_max</code>: Range of k values to test for optimal cluster selection</p>
+<h4 id="processing-steps_2">Processing steps<a class="headerlink" href="#processing-steps_2" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Load interpolated time series data</li>
+<li>Pivot data to create a feature matrix (parcels x time steps)</li>
+<li>Standardize features using z-score normalization</li>
+<li>Determine optimal k using silhouette score (if not specified)</li>
+<li>Apply k-means clustering</li>
+<li>Generate cluster centroid plots and sample time series visualizations</li>
+<li>Export cluster assignments for further analysis</li>
+</ol>
+<h1 id="contact">CONTACT<a class="headerlink" href="#contact" title="Permanent link">&para;</a></h1>
+<p>For any questions about this inter-row vegetation work, contact Dave Purnell at davejpurnell@gmail.com</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 27, 2026 13:27:46 UTC">March 27, 2026</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tracking", "navigation.indexes", "navigation.top", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

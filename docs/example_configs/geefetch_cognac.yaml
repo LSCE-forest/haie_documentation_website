@@ -1,0 +1,58 @@
+data_dir: /Users/dpurnell/data/gaia/GAIA_LSCE_dpurnell_data/sentinel2_ts/geefetch
+satellite_default:
+  resolution: 10
+  tile_size: 2_000
+  composite_method: TIMESERIES
+  # composite_method: MEAN
+  dtype: UInt16
+  # resampling: BILINEAR
+  # tile_range: [0, 0.25]
+  aoi:
+    spatial:
+      # # la bataille, douvesse, maine des champs
+      # left: 720_000
+      # right: 730_000
+      # bottom: 5050_000
+      # top: 5060_000
+      # # touzac
+      # left: 720_000
+      # right: 730_000
+      # bottom: 5040_000
+      # top: 5050_000
+      # # le peu
+      # left: 710_000
+      # right: 715_000
+      # bottom: 5050_000
+      # top: 5055_000
+      # ALL COMBINED
+      left: 710_000
+      right: 730_000
+      bottom: 5040_000
+      top: 5060_000
+      epsg: 32630  # UTM 30 N
+    temporal:
+      start_date: '2022-05-01'
+      end_date: '2024-04-30'
+      # start_date: '2022-05-01'
+      # end_date: '2022-05-31'
+  gee:
+    max_tile_size: 5
+    ee_project_id: geefetch
+s2:
+  selected_bands:
+  - B2
+  - B3
+  - B4
+  - B5
+  - B6
+  - B7
+  - B8
+  - B8A
+  - B11
+  - B12
+  # all data
+  cloudless_portion: 0
+  cloud_prb_threshold: 101
+  # reasonable filter
+  # cloudless_portion: 50
+  # cloud_prb_threshold: 50
